@@ -1,16 +1,21 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-    <Button buttonName="Test" buttonFunction="popMessage" buttonClass="btn btn-black" />
-  </div>
+    <div class="about">
+    <TitlePage title="This is an about page" />
+    <p>
+        <Button buttonName="Test" buttonFunction="popMessage" buttonClass="btn btn-black" />
+    </p>
+    </div>
 </template>
 
 <script>
 import Button from "../components/Button"
+import TitlePage from "../components/TitlePage"
+
 export default {
     name: 'About',
     components: {
-    Button
+    Button,
+    TitlePage
   },
   methods: {
     popMessage: function() {

@@ -1,11 +1,13 @@
 <template>
-  <div class="products__grid">
-    <ProductCard
+    <div class="products__grid">
+
+      <ProductCard
       v-for="product in productsArray"
       :key="product._id"
       :productObject="product"
-    />
-  </div>
+      />
+
+    </div>
 </template>
 
 <script>
@@ -23,4 +25,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+    .products__grid {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>

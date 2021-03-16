@@ -1,29 +1,41 @@
 <template>
     <div class="product__content" v-if="productItem">
         <TitlePage :title="productItem.title" />
-            <p>
-               Catégorie: {{productItem.category.title}} 
-            </p>
-            <img :src=productItem.imgUrl >
-            <p>
-                Description :
-            </p>
-            <p>
-                {{productItem.description}}
-            </p> 
-            <p>
-                {{productItem.price}} €
-                
-            </p>
+        <div class="text-center">
+            <b-card
+                    :img-src=productItem.imgUrl
+                    img-alt="Image"
+                    img-top
+                    tag="article"
+                    img-height="50"
+                    img-width="50"
+                    border-variant="dark"
+                >
+                <b-card-text>
+                    <h2>Catégorie: {{productItem.category.title}} </h2>
+                </b-card-text>
+                <b-card-text>
+                    {{productItem.description}}
+                </b-card-text>
+                <b-card-text>
+                    {{productItem.price | formatPriceDecimal | formatPrice}} 
+                </b-card-text>
+                <b-button variant="outline-info" @click="addItemToCart(productItem)">
+                    Ajouter au panier
+                </b-button>  
+            </b-card>
+        </div>
 
     </div>
 </template>
 
 <script>
     import TitlePage from "../components/TitlePage";
+    import Cart from "../mixins/Cart";
 
     export default {
        name:"Product",
+       mixins:[Cart],
        components:{
            TitlePage
        },
@@ -32,6 +44,11 @@
                productItem:{},
            }
        },
+        methods:{
+            addItemToCart: function(product) {
+                this.addTocart(product)
+            }
+        },
        created() {
            fetch(`http://localhost:3000/api/v1/products/${this.$route.params.id}`)
            .then(res=>res.json())
@@ -39,14 +56,21 @@
                this.productItem = data;
            })
            .catch(err=>console.log(err))
+       },
+       filters: {
+            formatPriceDecimal:function(value) {
+                return value.toFixed(2);
+            }
        }
     }
 </script>
 
 <style lang="scss" scoped>
-    img{
-        width: 150px;
-        height: 150px;
+    .text-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+
 
 </style>

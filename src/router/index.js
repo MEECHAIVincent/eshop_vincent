@@ -3,9 +3,11 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Contact from '../views/Contact.vue'
 import Shop from '../views/Shop.vue'
+import Cart from '../views/Cart.vue'
 import User from '../views/User.vue'
 import Product from '../views/Product.vue'
 import AddProduct from '../views/AddProduct.vue'
+import SearchProduct from '../views/SearchProduct.vue'
 import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
@@ -27,9 +29,19 @@ const routes = [
     component: Shop
   },
   {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
+  },
+  {
     path: '/product/:id',
     name: 'Product',
     component: Product
+  },
+  {
+    path: '/shop/search',
+    name: 'SearchProduct',
+    component: SearchProduct
   },
   {
     path: '/product',
@@ -44,7 +56,18 @@ const routes = [
   {
     path: '/account',
     name: 'User',
-    component: User
+    component: User,
+    beforeEnter(to, from, next) {
+      console.log('test')
+      if (!localStorage.getItem('token')) {
+         next({
+          name:"Login"
+        })
+      }
+      else {
+        next();
+      }
+    }
   },
   {
     path: '/about',

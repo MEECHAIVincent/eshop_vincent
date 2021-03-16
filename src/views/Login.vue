@@ -5,19 +5,22 @@
 
     <form @submit.prevent="login">
       <p>
-      <label htmlFor="email">Email: </label>
-      <input type="email" v-model="email" name="email">
+        <label htmlFor="email">Email: </label>
+        <input type="email" v-model="email" name="email">
       </p>
       <p>
-      <label htmlFor="password">Password: </label>
-      <input type="password" v-model="password" name="password">
-      </p>
-      <br>     
-      <input value="Connecter" type="submit">
+        <label htmlFor="password">Password: </label>
+        <input type="password" v-model="password" name="password">
+      </p>  
+      <p>  
+        <b-button variant="primary" type="submit">Connecter</b-button>
+      </p>  
     </form>
     <p v-if="msgErr">
         {{msgErr}}
     </p>
+
+    
 
   </div>
 </template>

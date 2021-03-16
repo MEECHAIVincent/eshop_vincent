@@ -14,7 +14,7 @@
        },
        data: function() {
            return {
-               myTitle:"Page User"
+               myTitle:"Page Contact"
            }
        }
     }
