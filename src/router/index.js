@@ -58,7 +58,6 @@ const routes = [
     name: 'User',
     component: User,
     beforeEnter(to, from, next) {
-      console.log('test')
       if (!localStorage.getItem('token')) {
          next({
           name:"Login"

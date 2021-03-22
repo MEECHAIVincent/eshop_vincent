@@ -11,6 +11,7 @@ export default {
             let productObject = {
                 id: product._id,
                 title: product.title,
+                imgUrl: product.imgUrl,
                 price: product.price,
                 qty: 1
             }
@@ -47,12 +48,53 @@ export default {
         },
         clearCart() {
             //localStorage.removeItem('cart');
+            localStorage.removeItem('cart');
+
         },
         removeOneQty(product) {
-
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            if (product.qty > 1){
+                let productObject = {
+                    id: product.id,
+                    title: product.title,
+                    imgUrl: product.imgUrl,
+                    price: product.price,
+                    qty: 1
+                }
+                let indexOfexisttingProduct = cart.findIndex((el) => el.id === productObject.id);
+                if (indexOfexisttingProduct !== -1) {
+                    cart[indexOfexisttingProduct].qty--;
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
         },
         addOneQty(product) {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            let productObject = {
+                id: product.id,
+                title: product.title,
+                imgUrl: product.imgUrl,
+                price: product.price,
+                qty: 1
+            }
+            let indexOfexisttingProduct = cart.findIndex((el) => el.id === productObject.id);
+            if (indexOfexisttingProduct !== -1) {
+                cart[indexOfexisttingProduct].qty++;
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
 
+        },
+        getCartTotal(cart) {
+           let total = cart.reduce(
+               (total , item) => total + (item.qty * item.price), 0
+            );
+           return total; 
+        },
+        getCartCount(cart) {
+            let total = cart.reduce(
+                (total, item) => total + item.qty, 0
+            );
+            return total;
         }
     }
 }

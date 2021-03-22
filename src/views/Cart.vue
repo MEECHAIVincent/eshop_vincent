@@ -7,6 +7,7 @@
         <b-table-simple bordered> 
             <b-thead head-variant="dark" bordered>
                 <b-tr>
+                    <b-th></b-th>
                     <b-th>Title</b-th>
                     <b-th>Quantity</b-th>
                     <b-th>Price</b-th>
@@ -18,18 +19,25 @@
             </b-thead>
             <b-tbody>
                 <b-tr v-for="item in cartArray" :key="item.id">
-                    <b-td> {{item.title}} </b-td>
+                    <b-td> <img :src="item.imgUrl"> </b-td>
+                    <b-td>  {{item.title}}  </b-td>
                     <b-td> {{item.qty}} </b-td>
-                    <b-td> {{item.price}} </b-td>
-                    <b-td> <b-button>-</b-button> </b-td>
-                    <b-td> <b-button>+</b-button> </b-td>
-                    <b-td> {{item.qty * item.price}} </b-td>
-                    <b-td> <b-button variant="danger">Supprimer le produit </b-button> </b-td>
+                    <b-td> {{item.price | formatPriceDecimal | formatPrice }} </b-td>
+                    <b-td> <b-button @click="deleteItemCart(item)">-</b-button> </b-td>
+                    <b-td> <b-button @click="addItemCart(item)">+</b-button> </b-td>
+                    <b-td> {{item.qty * item.price | formatPriceDecimal | formatPrice }} </b-td>
+                    <b-td> <b-button variant="danger" @click="removeProductCart(item)">Supprimer le produit </b-button> </b-td>
                 </b-tr>
             </b-tbody>
         </b-table-simple>
         <p>
-        <b-button>Vider le panier</b-button>
+             <i><b>Quantité totale : {{  calculQty }}</b></i>
+        </p>
+        <p>
+            <b>Total : {{  calculTotal | formatPriceDecimal | formatPrice }}</b>
+        </p>
+        <p>
+        <b-button @click="clearShopCart()">Vider le panier</b-button>
         </p>
     </b-container>
     
@@ -45,6 +53,7 @@
         data: function() {
             return {
                 cartArray:[],
+                //calculQty:0,
 
             }
         },
@@ -54,15 +63,50 @@
         mixins:[Cart],
         created() {
             this.cartArray = this.getCart();
-        }
+            //this.calculQty = this.getCartTotal(this.cartArray);
+        },
+        computed: {
+            calculQty: function(){
+                return this.getCartCount(this.cartArray);
+            },
+            calculTotal: function(){
+                return this.getCartTotal(this.cartArray);
+            }
+        },
+        methods: {
+            removeProductCart: function(product) {
+                this.removeItemCart(product);
+                this.cartArray = this.getCart();    
+            },
+            addItemCart: function(product) {
+                this.addOneQty(product);
+                this.cartArray = this.getCart();
+            },
+            deleteItemCart: function(product) {
+                this.removeOneQty(product);
+                this.cartArray = this.getCart();
+            },
+            clearShopCart: function() {
+                this.clearCart();
+                this.cartArray = this.getCart();
+            }
 
+        },
+        filters:{
+            formatPriceDecimal:function(value) {
+                return value.toFixed(2);
+            }
+
+        }
     }
   
 </script>
 
 
 <style lang="scss" scoped>
-
+    img{
+        max-width: 5rem;
+    }
 
 
 </style>

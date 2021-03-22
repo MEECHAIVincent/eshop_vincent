@@ -7,8 +7,7 @@
                     img-alt="Image"
                     img-top
                     tag="article"
-                    img-height="50"
-                    img-width="50"
+                    style="max-width: 20rem;"
                     border-variant="dark"
                 >
                 <b-card-text>
