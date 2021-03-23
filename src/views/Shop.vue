@@ -1,14 +1,12 @@
 <template>
     <div class="shop">
         <TitlePage title="Page Shop" />
-
-        <p>
-        <router-link to="/shop/search" custom v-slot="{ navigate }">
-            <b-button @click="navigate" @keypress.enter="navigate" role="link">Rechercher un produit</b-button>
-        </router-link>
-        </p>
         
-        <ProductsGrid :productsArray="productsFromApi" />
+        <div class="search__filter">
+            <input type="text" v-model="searchValue" @keyup="search" />
+        </div>
+
+        <ProductsGrid :productsArray="filteredShop" />
 
 
         
@@ -30,10 +28,24 @@
        },
        data: function(){
            return {
-               productsFromApi:[]
+               productsFromApi:[],
+               searchValue:""
+
            }
 
        },
+       methods: {
+           search: function() {
+               console.log('this')
+           }
+       },
+       computed: {
+           filteredShop: function(){
+               let filter = new RegExp(this.searchValue, "i");
+               return this.productsFromApi.filter(item=>item.title.match(filter));
+           }
+       },
+
        mixins:[ApiProducts],
        created() {
            this.getProducts() 
@@ -47,5 +59,13 @@
 </script>
 
 <style lang="scss" scoped>
+    .search__filter input[type="text"] {
+        border: solid 1px black;
+        border-radius: 10px;
+        font-family: 'Roboto', sans-serif;
+        padding: 10px ;
+        margin-bottom: 20px;
+        outline: none;
+    }
     
 </style>

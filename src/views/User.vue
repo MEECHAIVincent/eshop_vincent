@@ -3,10 +3,13 @@
         <TitlePage title="Mon compte"/>
         <div v-if="isLogged">
             <div class="user__info" v-if="user">
-                <p>Nom :{{user.firstName}}</p>
-                <p>Prénom :{{user.lastName}}</p>
-                <p>Email :{{user.email}}</p>
-                <button @click="logout">Se déconnecter</button>
+                <p>Nom: {{user.firstName}}</p>
+                <p>Prénom: {{user.lastName}}</p>
+                <p>Telephone: {{user.telephone}}</p>
+                <p>Adresse: {{user.address}}</p>
+                <p>Email: {{user.email}}</p>
+                <button class="button__modif">Modifier les infos</button> |               
+                <button @click="logout" class="button">Se déconnecter</button>
             </div>
         </div>
         <div v-else>
@@ -57,5 +60,45 @@ import TitlePage from "../components/TitlePage";
 </script>
 
 <style lang="scss" scoped>
+    .user__info {
+        border: solid 1px black;
+        border-radius: 10px;
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+
+    .user__info .button {
+        background: red;
+        border: solid 1px red;
+        border-radius: 15px;
+        color: white;
+        cursor: pointer;
+        padding: 10px 50px;
+        text-align: center;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
+    .user__info .button__modif {
+        background: blue;
+        border: solid 1px blue;
+        border-radius: 15px;
+        color: white;
+        cursor: pointer;
+        padding: 10px 50px;
+        text-align: center;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
+    .user__info .button:hover {
+        background: darkred;
+        border: solid 1px darkred;
+    }
+
+    .user__info .button__modif:hover {
+        background: lightblue;
+        border: solid 1px lightblue;
+    }
 
 </style>

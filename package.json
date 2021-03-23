@@ -8,6 +8,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.13.2",
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",

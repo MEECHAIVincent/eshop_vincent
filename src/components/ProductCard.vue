@@ -5,7 +5,7 @@
             img-alt="Image"
             img-top
             tag="article"
-            style="max-width: 13rem;"
+            style="max-width: 20rem;"
             class="ml-3 mb-3"
             border-variant="dark"
         >

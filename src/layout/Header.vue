@@ -10,7 +10,7 @@
             <router-link to="/shop">Shop</router-link> |
             <router-link to="/cart">Panier</router-link> |
             <router-link to="/account">Mon compte</router-link> |
-            <router-link to="/login">Connection</router-link>
+            <router-link to="/login">Connexion</router-link>
         </div>
 
     </header>
