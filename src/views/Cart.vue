@@ -30,16 +30,22 @@
                 </b-tr>
             </b-tbody>
         </b-table-simple>
-        <p>
-             <i><b>Quantité totale : {{  calculQty }}</b></i>
-        </p>
-        <p>
+        
+        <div v-if="cartArray">
+            <i><b>Quantité totale : {{  calculQty }}</b></i>
+        </div> 
+
+        <div v-if="cartArray">
             <b>Total : {{  calculTotal | formatPriceDecimal | formatPrice }}</b>
-        </p>
-        <p>
-            <b-button variant="danger" @click="clearShopCart()">Vider le panier</b-button> |
+        </div>
+
+   
+        <div>
+            <b-button variant="danger" @click="clearShopCart()">Vider le panier</b-button> |       
             <b-button variant="info" @click="checkout()">Payer</b-button>
-        </p>
+        </div>
+    
+
     </b-container>
     
   </div>
@@ -90,8 +96,7 @@
                 this.cartArray = this.getCart();
             },
             clearShopCart: function() {
-                this.clearCart();
-                this.cartArray = this.getCart();
+                this.cartArray = this.clearCart();
             },
             checkout: async function(){
                 const stripe = await stripePromise;
@@ -101,7 +106,7 @@
                             "Content-type":"application/json"
                     },
                     body:JSON.stringify({
-                        amount:30000
+                        amount: this.calculTotal.toFixed(2) * 100
                     })
                 });
                 const session = await response.json();
@@ -112,12 +117,6 @@
                 if(result.error) {
                     console.log(result.error);
                 }
-            }
-
-        },
-        filters:{
-            formatPriceDecimal:function(value) {
-                return value.toFixed(2);
             }
 
         }

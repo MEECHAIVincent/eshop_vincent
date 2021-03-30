@@ -8,10 +8,18 @@
                 <p>Telephone: {{user.telephone}}</p>
                 <p>Adresse: {{user.address}}</p>
                 <p>Email: {{user.email}}</p>
-                <button class="button__modif">Modifier les infos</button> |               
-                <button @click="logout" class="button">Se déconnecter</button>
+                <div v-if="user.isAdmin">
+                    <router-link to="/AddAdmin" custom v-slot="{ navigate }">
+                    <button @click="navigate" @keypress.enter="navigate" role="link" class="button__addAdmin">Ajouter un admin</button>
+                    </router-link>
+                </div>
+                <router-link :to="{name:'UpdateAccount',params:{id:user._id}}">
+                    <button class="button__modif">Mettre à jour</button> 
+                </router-link> |                
+                <button @click="logout" class="button">Se déconnecter</button> 
             </div>
         </div>
+ 
         <div v-else>
             <p>Vous n'êtes pas connecté</p>
         </div>
@@ -37,6 +45,10 @@ import TitlePage from "../components/TitlePage";
             logout: function() {
                 localStorage.removeItem('token');
                 this.isLogged = false;
+                this.$router.push('login')
+            },
+            addAdmin: function() {
+                this.user.isAdmin = true;
             }
         },
         created() {
@@ -63,8 +75,9 @@ import TitlePage from "../components/TitlePage";
     .user__info {
         border: solid 1px black;
         border-radius: 10px;
-        margin-left: 150px;
-        margin-right: 150px;
+        margin: 0 auto;
+        max-width: 600px;
+        width: 100%;
     }
 
     .user__info .button {
@@ -91,6 +104,18 @@ import TitlePage from "../components/TitlePage";
         text-transform: uppercase;
     }
 
+    .user__info .button__addAdmin {
+        background: green;
+        border: solid 1px green;
+        border-radius: 15px;
+        color: white;
+        cursor: pointer;
+        padding: 10px 50px;
+        text-align: center;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
     .user__info .button:hover {
         background: darkred;
         border: solid 1px darkred;
@@ -99,6 +124,11 @@ import TitlePage from "../components/TitlePage";
     .user__info .button__modif:hover {
         background: lightblue;
         border: solid 1px lightblue;
+    }
+
+    .user__info .button__addAdmin:hover {
+        background: lightgreen;
+        border: solid 1px lightgreen;
     }
 
 </style>

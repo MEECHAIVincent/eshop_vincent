@@ -85,16 +85,20 @@ export default {
 
         },
         getCartTotal(cart) {
-           let total = cart.reduce(
-               (total , item) => total + (item.qty * item.price), 0
-            );
-           return total; 
+            if(cart){
+                let total = cart.reduce(
+                    (total , item) => total + (item.qty * item.price), 0
+                    );
+                return total; 
+            }
         },
         getCartCount(cart) {
-            let total = cart.reduce(
-                (total, item) => total + item.qty, 0
-            );
-            return total;
+            if(cart){
+                let total = cart.reduce(
+                    (total, item) => total + item.qty, 0
+                );
+                return total;
+            }
         }
     }
 }

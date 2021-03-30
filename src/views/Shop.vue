@@ -36,7 +36,7 @@
        },
        methods: {
            search: function() {
-               console.log('this')
+               //console.log('this')
            }
        },
        computed: {
