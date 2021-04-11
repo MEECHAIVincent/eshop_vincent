@@ -10,11 +10,15 @@ import UserCrud from '../views/UserCrud.vue'
 import Product from '../views/Product.vue'
 import ProductCrud from '../views/ProductCrud.vue'
 import AddProduct from '../views/AddProduct.vue'
+import AddCategory from '../views/AddCategory.vue'
 import UpdateProduct from '../views/UpdateProduct.vue'
+import UpdateCategory from '../views/UpdateCategory.vue'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import AddAdmin from '../views/AddAdmin.vue'
 import UpdateUser from '../views/UpdateUser.vue'
+import OrderCrud from '../views/OrdersCrud.vue'
+import CategoryCrud from '../views/CategoriesCrud.vue'
 import Success from '../views/Success.vue'
 import Cancel from '../views/Cancel.vue'
 
@@ -77,6 +81,11 @@ const routes = [
     component: Product
   },
   {
+    path: '/account/addCategory',
+    name: 'AddCategory',
+    component: AddCategory
+  },
+  {
     path: '/account/addProduct',
     name: 'AddProduct',
     component: AddProduct
@@ -137,7 +146,25 @@ const routes = [
     name: 'UpdateUser',
     component: UpdateUser,
 
-  }
+  },
+  {
+    path: '/account/ordersCrud',
+    name: 'OrderCrud',
+    component: OrderCrud,
+
+  },
+  {
+    path: '/account/categorysCrud',
+    name: 'CategoryCrud',
+    component: CategoryCrud,
+
+  },
+  {
+    path: '/account/updateCategory',
+    name: 'UpdateCategory',
+    component: UpdateCategory,
+
+  },
   // {
   //   path: '/about',
   //   name: 'About',

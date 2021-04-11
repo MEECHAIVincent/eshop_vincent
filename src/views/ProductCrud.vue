@@ -32,7 +32,7 @@
                             <router-link :to="{name:'UpdateProduct',params:{id:product._id}}">
                                 <b-button variant="info">Modifier</b-button> 
                             </router-link> |
-                            <b-button variant="danger" >Supprimer </b-button>
+                            <b-button variant="danger" @click="deleteProduct(product)">Supprimer </b-button>
                         </b-td>
                     </b-tr>
                 </b-tbody>
@@ -48,6 +48,7 @@
 
 import TitlePage from '../components/TitlePage'
 import ApiProductCrud from '../mixins/Api.Products';
+import apiConfigs from "../configs/api.configs";
 
 export default {
     data: function(){
@@ -66,6 +67,18 @@ export default {
         })
         .catch(err => console.log(err))          
     },
+    methods: {
+        deleteProduct: function(product) {
+            fetch(`${apiConfigs.apiUrl}/product/delete/${product._id}`)
+            .then(res=>res.json())
+            .then(data=> {
+                console.log(data);
+                this.$router.go(); 
+                })
+            .catch(err=>console.log(err))
+        }
+
+    }
     
 }
 </script>

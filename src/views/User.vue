@@ -14,6 +14,12 @@
                     </router-link> |
                     <router-link to="/account/productCrud" custom v-slot="{ navigate }">
                         <button @click="navigate" @keypress.enter="navigate" role="link" class="button__Crud">Product CRUD</button>
+                    </router-link> |
+                    <router-link to="/account/ordersCrud" custom v-slot="{ navigate }">
+                        <button @click="navigate" @keypress.enter="navigate" role="link" class="button__Crud">Orders CRUD</button>
+                    </router-link> |
+                    <router-link to="/account/categorysCrud" custom v-slot="{ navigate }">
+                        <button @click="navigate" @keypress.enter="navigate" role="link" class="button__Crud">Categories CRUD</button>
                     </router-link> 
                 </div>
                 <router-link :to="{name:'UpdateUser',params:{id:user._id}}">

@@ -3,14 +3,14 @@
         <TitlePage title="Ajouter un Admin" /> 
     
         <form  @submit.prevent="addAdmin" class="form">
-            <input required type="text" v-model="firstName" name="firstName" placeholder="FirstName" />
-            <input required type="text" v-model="lastName" name="lastName" placeholder="LastName" />
-            <input required type="text" v-model="telephone" name="telephone" placeholder="Telephone" />
-            <input required type="email" v-model="email" name="email" placeholder="Email" />
-            <input required type="password"  v-model="password" name="password" placeholder="Password" />
-            <input required type="text" v-model="address" name="address" placeholder="Address" />
+            <input  type="text" v-model="firstName" name="firstName" placeholder="FirstName" />
+            <input  type="text" v-model="lastName" name="lastName" placeholder="LastName" />
+            <input  type="text" v-model="telephone" name="telephone" placeholder="Telephone" />
+            <input  type="email" v-model="email" name="email" placeholder="Email" />
+            <input  type="password"  v-model="password" name="password" placeholder="Password" />
+            <input  type="text" v-model="address" name="address" placeholder="Address" />
             <div>
-                <input type="checkbox" v-model="isAdmin" name="isAdmin">
+                <input required type="checkbox" v-model="isAdmin" name="isAdmin">
                 <label for="isAdmin"> isAdmin</label>
             </div>
         
@@ -65,17 +65,14 @@ import TitlePage from "../components/TitlePage";
               },
               body: bodyToSend
           }
-          fetch("http://localhost:3000/api/v1/users", requestOptions)
+          fetch("http://localhost:3000/api/v1/user/create", requestOptions)
           .then(res=>res.json())
           .then(data=> {
-              if(!data.auth) {
-                  this.msgErr = data.message;
-              } else {
-                  console.log(data);
-                  //let token = data.token;
-                  //localStorage.setItem('token', token);
-                  this.$router.push('/account');
-              }
+                console.log(data);
+                //let token = data.token;
+                //localStorage.setItem('token', token);
+                this.$router.push('/account/userCrud');
+        
           })
           .catch(err=>console.log(err))
       }

@@ -1,28 +1,13 @@
 <template>
-  <div class="addProduct__form">
+  <div class="addCategory__form">
 
-    <TitlePage title="Ajouter un Produit" /> 
+    <TitlePage title="Ajouter une Catégorie" /> 
 
-    <form @submit.prevent="addProduct" class="form">
+    <form @submit.prevent="addCategory" class="form">
         
         <label htmlFor="title">Titre: </label>
         <input type="text" v-model="title" name="title">
-        <label htmlFor="price">Prix: </label>
-        <input type="text" v-model="price" name="price"> €
-
-        <label htmlFor="description">Description: </label>
-        <input type="text" v-model="description" name="description">
-    
-        <label htmlFor="imgUrl">URL image: </label>
-        <input type="text" v-model="imgUrl" name="imgUrl">
  
-        <select v-model="category">
-            <option disabled value="">Catégorie</option>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
-        </select>
-        <br>     
         <button type="submit" class="button" >Ajouter</button>
     </form>
     <p v-if="msgErr">
@@ -40,10 +25,6 @@ import TitlePage from "../components/TitlePage";
     data: function() {
         return {
             title:"",
-            price:"",
-            description:"",
-            imgUrl:"",
-            category:"",
             msgErr:""
         }
     },
@@ -51,13 +32,9 @@ import TitlePage from "../components/TitlePage";
       TitlePage
     },
     methods: {
-      addProduct: function(e) {
+      addCategory: function(e) {
           const body = {
-              title: this.title,
-              price: this.price,
-              description: this.description,
-              imgUrl: this.imgUrl,
-              category: this.category
+              title: this.title
           }
           const bodyToSend = JSON.stringify(body);
           const requestOptions = {
@@ -68,7 +45,7 @@ import TitlePage from "../components/TitlePage";
               body: bodyToSend
           }
              console.log(bodyToSend)
-          fetch("http://localhost:3000/api/v1/products", requestOptions)
+          fetch("http://localhost:3000/api/v1/category", requestOptions)
           .then(res=>res.json())
           .then(data=> { 
                 console.log(data);
@@ -83,28 +60,26 @@ import TitlePage from "../components/TitlePage";
 
 
 <style lang="scss" scoped>
-    .addProduct__form {
+    .addCategory__form {
         font-family: 16px;
         margin: 0 auto;
         max-width: 600px;
         width: 100%;
     }
 
-    .addProduct__form .separator {
+    .addCategory__form .separator {
         border-bottom: solid 1px #ccc;
         margin-bottom: 15px;
     }
 
-    .addProduct__form .form {
+    .addCategory__form .form {
         display: flex;
         flex-direction: column;
         font-size: 16px;
         
     }
 
-    .addProduct__form input[type="email"],
-    .addProduct__form input[type="password"],
-    .addProduct__form input[type="text"] {
+    .addCategory__form input[type="text"] {
         border: solid 1px #e8e8e8;
         font-family: 'Roboto', sans-serif;
         padding: 10px 7px;
@@ -112,7 +87,7 @@ import TitlePage from "../components/TitlePage";
         outline: none;
     }
 
-    .addProduct__form .button {
+    .addCategory__form .button {
         background: green;
         border: solid 1px green;
         color: white;
@@ -122,14 +97,13 @@ import TitlePage from "../components/TitlePage";
         text-transform: uppercase;
     }
 
-    .addProduct__form .button:hover {
+    .addCategory__form .button:hover {
         background: darkgreen;
         border: solid 1px darkgreen;
     }
 
-    .addProduct__form input[type="email"],
-    .addProduct__form input[type="password"],
-    .addProduct__form .button {
+    .addCategory__form input[type="text"],
+    .addCategory__form .button {
         font-size: 15px;
         border-radius: 3px;
   
