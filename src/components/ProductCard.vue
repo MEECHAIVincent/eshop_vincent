@@ -17,25 +17,36 @@
             <b-card-text>
                 {{productObject.price | formatPriceDecimal | formatPrice}} 
             </b-card-text>
-            <b-button variant="outline-info" @click="addItemToCart(productObject)">
-                Ajouter au panier
-            </b-button>  
+            <b-card-text>
+                <b-button variant="outline-info" @click="addItemToCart(productObject)">
+                    Ajouter au panier
+                </b-button>
+            </b-card-text>
+            <b-card-text>  
+                <b-button variant="outline-info" @click="addItemToWishList(productObject)">
+                    Ajouter à la WishList
+                </b-button>
+            </b-card-text>  
         </b-card>
     </div>
 </template>
 
 <script>
     import Cart from "../mixins/Cart";
+    import WishList from "../mixins/WishList"
 
     export default {
         name:"ProductCard",
-        mixins:[Cart],
+        mixins:[Cart,WishList],
         props:{
             productObject: Object
         },
         methods:{
             addItemToCart: function(product) {
                 this.addTocart(product)
+            },
+            addItemToWishList: function(product) {
+                this.addToWishList(product)
             }
         },
         filters:{

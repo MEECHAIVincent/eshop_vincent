@@ -1,17 +1,21 @@
 <template>
-    <div class="update__account" v-if="updateAccount">
+    <div class="update__account" v-if="updateProduct">
         <div class="update__form">
             <TitlePage title="Modifier mes Informations" />
 
-            <div v-if="updateAccount" >
+            <div v-if="updateProduct" >
 
                 <form  @submit.prevent="updateInfo" class="form" >
-                    <input type="text" v-model="firstName" name="firstName"  />
-                    <input type="text" v-model="lastName" name="lastName"  />
-                    <input type="text" v-model="telephone" name="telephone" />
-                    <input type="text" v-model="address" name="address" />
+                    <label htmlFor="title">Titre : </label>
+                    <input type="text" v-model="title" name="title" />
+                    <label htmlFor="imgUrl">Image URL : </label>
+                    <input type="text" v-model="imgUrl" name="imgUrl"  />
+                    <label htmlFor="description">Téléphone : </label>
+                    <input type="text" v-model="description" name="description" />
+                    <label htmlFor="price">Prix : </label>
+                    <input type="text" v-model="price" name="price" />
                 
-                <input type="submit" class="button" value="Modifier"/>
+                <input type="submit" class="button" value="Modifier" />
                 </form>
 
             </div>
@@ -32,11 +36,11 @@
        },
        data: function(){
            return {
-                updateAccount:{},
-                firstName:"",
-                lastName:"",
-                telephone:"",
-                address:"",
+                updateProduct:{},
+                title:"",
+                imgUrl:"",
+                description:"",
+                price:"",
                 msgErr:""
            }
        },
@@ -44,13 +48,13 @@
 
             updateInfo: function(e) {
                 const body = {
-                firstName: this.firstName,
-                lastName: this.lastName,
-                telephone: this.telephone,
-                address: this.address
+                title: this.title,
+                imgUrl: this.imgUrl,
+                description: this.description,
+                price: this.price
             }
             const bodyToSend = JSON.stringify(body);
-            console.log(bodyToSend);
+            // console.log(bodyToSend);
             const requestOptions = {
                 method: "POST",
                 headers: {
@@ -61,40 +65,37 @@
             const token = localStorage.getItem('token');
             if(token) {
                 const decodedToken = VueJwtDecode.decode(token);
-                fetch(`http://localhost:3000/api/v1/users/update/${decodedToken.id}`, requestOptions , {
+                fetch(`http://localhost:3000/api/v1/product/update/${this.$route.params.id}`, requestOptions , {
                     headers: {
                         Authorization: token
                     }
                 })
                 .then(res=>res.json())
                 .then(data=> {
-                    if(!data.auth) {
-                        this.msgErr = data.message;
-                    } else {
-                        console.log(data);
-                        //let token = data.token;
-                        //localStorage.setItem('token', token);
-                        this.$router.push('/account');
-                    }
+                    console.log(data);
+                    this.$router.push('/account/productCrud'); 
                 })
                 .catch(err=>console.log(err))
                 }
-            }
+            },
+
            
        },
        created() {
             const token = localStorage.getItem('token');
             if(token) {
-               const decodedToken = VueJwtDecode.decode(token);
-               fetch(`http://localhost:3000/api/v1/users/${decodedToken.id}`, {
+               fetch(`http://localhost:3000/api/v1/product/${this.$route.params.id}`, {
                    headers: {
                        Authorization: token
                    }
                })
                .then(res => res.json())
                .then(data=>{
-                   console.log(data);
-                   this.updateAccount = data;
+                    // console.log(data);
+                    this.title = data.title,
+                    this.imgUrl = data.imgUrl,
+                    this.description = data.description,
+                    this.price = data.price
                })
                .catch(err => console.log(err))
             }

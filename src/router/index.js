@@ -4,13 +4,17 @@ import VueRouter from 'vue-router'
 import Contact from '../views/Contact.vue'
 import Shop from '../views/Shop.vue'
 import Cart from '../views/Cart.vue'
+import WishList from '../views/WishList.vue'
 import User from '../views/User.vue'
+import UserCrud from '../views/UserCrud.vue'
 import Product from '../views/Product.vue'
+import ProductCrud from '../views/ProductCrud.vue'
 import AddProduct from '../views/AddProduct.vue'
+import UpdateProduct from '../views/UpdateProduct.vue'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import AddAdmin from '../views/AddAdmin.vue'
-import UpdateAccount from '../views/UpdateAccount.vue'
+import UpdateUser from '../views/UpdateUser.vue'
 import Success from '../views/Success.vue'
 import Cancel from '../views/Cancel.vue'
 
@@ -33,9 +37,29 @@ const routes = [
     component: Shop
   },
   {
+    path: '/account/productCrud',
+    name: 'ProductCrud',
+    component: ProductCrud
+  },
+  {
     path: '/cart',
     name: 'Cart',
-    component: Cart
+    component: Cart,
+    // beforeEnter(to, from, next) {
+    //   if (!localStorage.getItem('token')) {
+    //      next({
+    //       name:"Login"
+    //     })
+    //   }
+    //   else {
+    //     next();
+    //   }
+    // }
+  },
+  {
+    path: '/wishlist',
+    name: 'WishList',
+    component: WishList,
   },
   {
     path: '/success',
@@ -53,9 +77,14 @@ const routes = [
     component: Product
   },
   {
-    path: '/product',
+    path: '/account/addProduct',
     name: 'AddProduct',
     component: AddProduct
+  },
+  {
+    path: '/account/updateProduct',
+    name: 'UpdateProduct',
+    component: UpdateProduct
   },
   {
     path: '/login',
@@ -93,14 +122,21 @@ const routes = [
     }
   },
   {
-    path: '/account/update',
-    name: 'UpdateAccount',
-    component: UpdateAccount,
-  },
-  {
-    path: '/addAdmin',
+    path: '/account/addAdmin',
     name: 'AddAdmin',
     component: AddAdmin,
+  },
+  {
+    path: '/account/userCrud',
+    name: 'UserCrud',
+    component: UserCrud,
+
+  },
+  {
+    path: '/account/update',
+    name: 'UpdateUser',
+    component: UpdateUser,
+
   }
   // {
   //   path: '/about',

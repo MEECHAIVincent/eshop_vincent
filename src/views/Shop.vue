@@ -50,7 +50,7 @@
        created() {
            this.getProducts() 
            .then(data => {
-                //console.log(data)
+                console.log(data)
                 this.productsFromApi = data;
             })
             .catch(err => console.log(err))          

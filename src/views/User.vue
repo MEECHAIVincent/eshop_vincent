@@ -9,11 +9,14 @@
                 <p>Adresse: {{user.address}}</p>
                 <p>Email: {{user.email}}</p>
                 <div v-if="user.isAdmin">
-                    <router-link to="/AddAdmin" custom v-slot="{ navigate }">
-                    <button @click="navigate" @keypress.enter="navigate" role="link" class="button__addAdmin">Ajouter un admin</button>
-                    </router-link>
+                    <router-link to="/account/userCrud" custom v-slot="{ navigate }">
+                        <button @click="navigate" @keypress.enter="navigate" role="link" class="button__Crud">User CRUD</button>
+                    </router-link> |
+                    <router-link to="/account/productCrud" custom v-slot="{ navigate }">
+                        <button @click="navigate" @keypress.enter="navigate" role="link" class="button__Crud">Product CRUD</button>
+                    </router-link> 
                 </div>
-                <router-link :to="{name:'UpdateAccount',params:{id:user._id}}">
+                <router-link :to="{name:'UpdateUser',params:{id:user._id}}">
                     <button class="button__modif">Mettre à jour</button> 
                 </router-link> |                
                 <button @click="logout" class="button">Se déconnecter</button> 
@@ -30,6 +33,7 @@
 
 import VueJwtDecode from "vue-jwt-decode";
 import TitlePage from "../components/TitlePage";
+import apiConfigs from "../configs/api.configs";
 
     export default {
         components: {
@@ -55,7 +59,7 @@ import TitlePage from "../components/TitlePage";
             const token = localStorage.getItem('token');
             if(token) {
                const decodedToken = VueJwtDecode.decode(token);
-               fetch(`http://localhost:3000/api/v1/users/${decodedToken.id}`, {
+               fetch(`${apiConfigs.apiUrl}/user/${decodedToken.id}`, {
                    headers: {
                        Authorization: token
                    }
@@ -104,7 +108,7 @@ import TitlePage from "../components/TitlePage";
         text-transform: uppercase;
     }
 
-    .user__info .button__addAdmin {
+    .user__info .button__Crud {
         background: green;
         border: solid 1px green;
         border-radius: 15px;
@@ -126,9 +130,10 @@ import TitlePage from "../components/TitlePage";
         border: solid 1px lightblue;
     }
 
-    .user__info .button__addAdmin:hover {
+    .user__info .button__Crud:hover {
         background: lightgreen;
         border: solid 1px lightgreen;
     }
+
 
 </style>

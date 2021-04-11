@@ -8,6 +8,7 @@
             <router-link to="/about">About</router-link> | -->
             <router-link to="/">Home</router-link> |
             <router-link to="/cart">Panier</router-link> |
+            <router-link to="/wishlist">WishList</router-link> |
             <router-link to="/account">Mon compte</router-link> |
             <router-link to="/login">Connexion</router-link> |
             <router-link to="/contact">Contact</router-link> 
@@ -17,8 +18,10 @@
 </template>
 
 <script>
+
+
 export default {
-    
+
 }
 </script>
 

@@ -3,12 +3,12 @@
         <TitlePage title="Inscription" /> 
     
         <form  @submit.prevent="signup" class="form">
-            <input required type="text" v-model="firstName" name="firstName" placeholder="FirstName" />
-            <input required type="text" v-model="lastName" name="lastName" placeholder="LastName" />
-            <input required type="text" v-model="telephone" name="telephone" placeholder="Telephone" />
+            <input required type="text" v-model="firstName" name="firstName" placeholder="Prénom" />
+            <input required type="text" v-model="lastName" name="lastName" placeholder="Nom" />
+            <input type="text" v-model="telephone" name="telephone" placeholder="Téléphone" />
             <input required type="email" v-model="email" name="email" placeholder="Email" />
-            <input required type="password"  v-model="password" name="password" placeholder="Password" />
-            <input required type="text" v-model="address" name="address" placeholder="Address" />
+            <input required type="password"  v-model="password" name="password" placeholder="Mot de passe" />
+            <input type="text" v-model="address" name="address" placeholder="Adresse" />
             <p>
                 Si vous êtes déjà inscrit:
                 <router-link to="/login">
@@ -29,6 +29,7 @@
 <script>
 
 import TitlePage from "../components/TitlePage";
+import apiConfigs from "../configs/api.configs";
 
   export default {
     data: function() {
@@ -64,7 +65,7 @@ import TitlePage from "../components/TitlePage";
               },
               body: bodyToSend
           }
-          fetch("http://localhost:3000/api/v1/users", requestOptions)
+          fetch(`${apiConfigs.apiUrl}/user`, requestOptions)
           .then(res=>res.json())
           .then(data=> {
               if(!data.auth) {

@@ -4,7 +4,7 @@
     
         <form  @submit.prevent="login" class="form">
             <input required type="email" v-model="email" name="email" placeholder="Email" />
-            <input required type="password"  v-model="password" name="password" placeholder="Password" />
+            <input required type="password"  v-model="password" name="password" placeholder="Mot de passe" />
             <p>
                 Si vous pas encore inscrit:
                 <router-link to="/signUp">
@@ -52,7 +52,7 @@ import apiConfigs from "../configs/api.configs";
               },
               body: bodyToSend
           }
-          fetch(`${apiConfigs.apiUrl}/users/login`, requestOptions)
+          fetch(`${apiConfigs.apiUrl}/user/login`, requestOptions)
           .then(res=>res.json())
           .then(data=> {
               if(!data.auth) {
