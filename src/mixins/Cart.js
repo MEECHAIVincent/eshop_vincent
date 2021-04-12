@@ -9,7 +9,7 @@ export default {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
             let productObject = {
-                id: product._id,
+                _id: product._id,
                 title: product.title,
                 imgUrl: product.imgUrl,
                 price: product.price,
@@ -19,7 +19,7 @@ export default {
             //findIndex => renvoies l'index ou -1
 
             let indexOfExistingProduct = cart.findIndex(
-                (el) => el.id === productObject.id 
+                (el) => el._id === productObject._id 
             )
 
             if (indexOfExistingProduct !== -1){
@@ -41,7 +41,7 @@ export default {
             // le réinsérer localStorage.setItem
             let cart = JSON.parse(localStorage.getItem('cart'));
             const filteredCart = cart.filter((item) => {
-                return item.id !== product.id;
+                return item._id !== product._id;
             });
 
             localStorage.setItem('cart', JSON.stringify(filteredCart));
@@ -55,13 +55,13 @@ export default {
             let cart = JSON.parse(localStorage.getItem('cart'));
             if (product.qty > 1){
                 let productObject = {
-                    id: product.id,
+                    _id: product._id,
                     title: product.title,
                     imgUrl: product.imgUrl,
                     price: product.price,
                     qty: 1
                 }
-                let indexOfexisttingProduct = cart.findIndex((el) => el.id === productObject.id);
+                let indexOfexisttingProduct = cart.findIndex((el) => el._id === productObject._id);
                 if (indexOfexisttingProduct !== -1) {
                     cart[indexOfexisttingProduct].qty--;
                 }
@@ -71,13 +71,13 @@ export default {
         addOneQty(product) {
             let cart = JSON.parse(localStorage.getItem('cart'));
             let productObject = {
-                id: product.id,
+                _id: product._id,
                 title: product.title,
                 imgUrl: product.imgUrl,
                 price: product.price,
                 qty: 1
             }
-            let indexOfexisttingProduct = cart.findIndex((el) => el.id === productObject.id);
+            let indexOfexisttingProduct = cart.findIndex((el) => el._id === productObject._id);
             if (indexOfexisttingProduct !== -1) {
                 cart[indexOfexisttingProduct].qty++;
             }

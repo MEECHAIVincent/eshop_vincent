@@ -17,10 +17,8 @@
         <input type="text" v-model="imgUrl" name="imgUrl">
  
         <select v-model="category">
-            <option disabled value="">Catégorie</option>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
+            <option></option>
+            <option v-for="category in categoryFromApi" v-bind:key="category._id" :value="category._id">{{category.title}}</option>
         </select>
         <br>     
         <button type="submit" class="button" >Ajouter</button>
@@ -35,10 +33,13 @@
 <script>
 
 import TitlePage from "../components/TitlePage";
+import ApiCategory from '../mixins/Api.Category';
+import apiConfigs from "../configs/api.configs";
 
   export default {
     data: function() {
         return {
+            categoryFromApi: [],
             title:"",
             price:"",
             description:"",
@@ -49,6 +50,15 @@ import TitlePage from "../components/TitlePage";
     },
     components: {
       TitlePage
+    },
+    mixins: [ApiCategory],
+    created(){
+        this.getCategorys()
+      .then((data) => {
+        console.log(data);
+        this.categoryFromApi = data;
+      })
+      .catch(err => console.log(err));
     },
     methods: {
       addProduct: function(e) {
@@ -68,7 +78,7 @@ import TitlePage from "../components/TitlePage";
               body: bodyToSend
           }
              console.log(bodyToSend)
-          fetch("http://localhost:3000/api/v1/products", requestOptions)
+          fetch(`${apiConfigs.apiUrl}/products`, requestOptions)
           .then(res=>res.json())
           .then(data=> { 
                 console.log(data);

@@ -20,6 +20,7 @@
 <script>
 
 import TitlePage from "../components/TitlePage";
+import apiConfigs from "../configs/api.configs";
 
   export default {
     data: function() {
@@ -45,7 +46,7 @@ import TitlePage from "../components/TitlePage";
               body: bodyToSend
           }
              console.log(bodyToSend)
-          fetch("http://localhost:3000/api/v1/category", requestOptions)
+          fetch(`${apiConfigs.apiUrl}/category`, requestOptions)
           .then(res=>res.json())
           .then(data=> { 
                 console.log(data);

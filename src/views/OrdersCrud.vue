@@ -22,7 +22,7 @@
                     {{ product.title }}
                 </p>
             </td>
-            <b-td> {{ order.user}} </b-td>
+            <b-td> {{ order.user.lastName}} {{ order.user.firstName}} </b-td>
             <b-td>
 
               <b-button variant="info" class="btn_edit" @click="update(order._id)">Modifier</b-button> |
@@ -37,6 +37,8 @@
 <script>
 import TitlePage from "../components/TitlePage";
 import ApiOrdersCrud from "../mixins/Api.Orders";
+import apiConfigs from "../configs/api.configs";
+
 export default {
   data: function() {
     return {
@@ -57,7 +59,7 @@ export default {
   },
   methods: {
         remove(id) {
-            fetch(`http://localhost:3000/api/v1/orders/delete/${id}`)
+            fetch(`${apiConfigs.apiUrl}/orders/delete/${id}`)
                 .then((res) => res.json())
                 .catch((err) => console.log(err));
                 this.$router.go();

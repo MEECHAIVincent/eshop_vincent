@@ -23,6 +23,7 @@
 
     import VueJwtDecode from "vue-jwt-decode";
     import TitlePage from "../components/TitlePage";
+    import apiConfigs from "../configs/api.configs";
 
     export default {
        components:{
@@ -53,7 +54,7 @@
             const token = localStorage.getItem('token');
             if(token) {
                 const decodedToken = VueJwtDecode.decode(token);
-                fetch(`http://localhost:3000/api/v1/categorys/update/${this.$route.params.id}`, requestOptions , {
+                fetch(`${apiConfigs.apiUrl}/categorys/update/${this.$route.params.id}`, requestOptions , {
                     headers: {
                         Authorization: token
                     }
@@ -72,7 +73,7 @@
        created() {
             const token = localStorage.getItem('token');
             if(token) {
-               fetch(`http://localhost:3000/api/v1/categorys/${this.$route.params.id}`, {
+               fetch(`${apiConfigs.apiUrl}/categorys/${this.$route.params.id}`, {
                    headers: {
                        Authorization: token
                    }

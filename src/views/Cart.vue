@@ -55,6 +55,7 @@
 
     import TitlePage from "../components/TitlePage";
     import Cart from "../mixins/Cart";
+    import apiConfigs from "../configs/api.configs";
     import {loadStripe} from '@stripe/stripe-js';
     const stripePromise = loadStripe('pk_test_51IYB0mJijRGvnX6MyzW0TMUJPEssRCAIk1zYqjarjf80L8CsEs8c1kJUCmpV3t9qm8F3cQ0YPOMI43Vri9GxbkEA00tpkBQrLm');
 
@@ -100,7 +101,7 @@
             },
             checkout: async function(){
                 const stripe = await stripePromise;
-                const response = await fetch('http://localhost:3000/api/v1/create-checkout-session',{
+                const response = await fetch(`${apiConfigs.apiUrl}/create-checkout-session`,{
                     method:"POST",
                     headers : {
                             "Content-type":"application/json"

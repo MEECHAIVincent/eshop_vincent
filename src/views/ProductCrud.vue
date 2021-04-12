@@ -21,12 +21,12 @@
                     </b-tr>
                 </b-thead>
                 <b-tbody>
-                    <b-tr v-for="product in productsFromApi" :key="product._id">
+                    <b-tr v-for="product in productsFromApi" v-bind:key="product._id">
                         <b-td> {{ product._id }} </b-td>
                         <b-td> <img :src="product.imgUrl"> </b-td>
                         <b-td> {{product.title}}  </b-td>
                         <b-td> {{product.description}} </b-td>
-                        <b-td> {{product.category}} </b-td>
+                        <b-td> {{product.category.title}} </b-td>
                         <b-td>  {{product.price | formatPriceDecimal | formatPrice }} </b-td>
                         <b-td> 
                             <router-link :to="{name:'UpdateProduct',params:{id:product._id}}">

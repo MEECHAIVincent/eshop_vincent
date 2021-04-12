@@ -3,9 +3,9 @@
         <TitlePage title="Page Shop" />
         
         <div class="search__filter">
-            <input type="text" v-model="searchValue" @keyup="search" />
+            Recherche : <input type="text" v-model="searchValue" @keyup="search" />
         </div>
-
+        
         <ProductsGrid :productsArray="filteredShop" />
 
 
@@ -50,7 +50,7 @@
        created() {
            this.getProducts() 
            .then(data => {
-                console.log(data)
+                //console.log(data)
                 this.productsFromApi = data;
             })
             .catch(err => console.log(err))          

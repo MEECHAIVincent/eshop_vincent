@@ -58,7 +58,7 @@ import apiConfigs from "../configs/api.configs";
               if(!data.auth) {
                   this.msgErr = data.message;
               } else {
-                  console.log(data);
+                  //console.log(data);
                   let token = data.token;
                   localStorage.setItem('token', token);
                   this.$router.push('/account');

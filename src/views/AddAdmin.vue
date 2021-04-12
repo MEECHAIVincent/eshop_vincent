@@ -28,6 +28,7 @@
 <script>
 
 import TitlePage from "../components/TitlePage";
+import apiConfigs from "../configs/api.configs";
 
   export default {
     data: function() {
@@ -65,7 +66,7 @@ import TitlePage from "../components/TitlePage";
               },
               body: bodyToSend
           }
-          fetch("http://localhost:3000/api/v1/user/create", requestOptions)
+          fetch(`${apiConfigs.apiUrl}/create`, requestOptions)
           .then(res=>res.json())
           .then(data=> {
                 console.log(data);
