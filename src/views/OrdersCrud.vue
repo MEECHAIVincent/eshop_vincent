@@ -24,9 +24,10 @@
             </td>
             <b-td> {{ order.user.lastName}} {{ order.user.firstName}} </b-td>
             <b-td>
-
-              <b-button variant="info" class="btn_edit" @click="update(order._id)">Modifier</b-button> |
-              <b-button variant="danger" @click="remove(order._id)">Supprimer </b-button>
+                <router-link :to="{name:'UpdateOrder',params:{id:order._id}}">
+                    <b-button variant="info">Modifier</b-button> 
+                </router-link> |
+                <b-button variant="danger" @click="remove(order._id)">Supprimer </b-button>
             </b-td>
           </b-tr>
         </b-tbody>
@@ -63,11 +64,7 @@ export default {
                 .then((res) => res.json())
                 .catch((err) => console.log(err));
                 this.$router.go();
-        },
-        update(order) {
-            localStorage.setItem('order',order)
-            this.$router.push('/updateOrder')
-        },  
+        }
     }
 };
 </script>

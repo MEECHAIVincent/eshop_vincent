@@ -13,6 +13,7 @@ import AddProduct from '../views/AddProduct.vue'
 import AddCategory from '../views/AddCategory.vue'
 import UpdateProduct from '../views/UpdateProduct.vue'
 import UpdateCategory from '../views/UpdateCategory.vue'
+import UpdateOrder from '../views/UpdateOrder.vue'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import AddAdmin from '../views/AddAdmin.vue'
@@ -151,6 +152,12 @@ const routes = [
     path: '/account/ordersCrud',
     name: 'OrderCrud',
     component: OrderCrud,
+
+  },
+  {
+    path: '/account/updateOrder',
+    name: 'UpdateOrder',
+    component: UpdateOrder,
 
   },
   {
