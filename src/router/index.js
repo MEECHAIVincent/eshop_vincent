@@ -49,6 +49,16 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart,
+    beforeEnter(to, from, next) {
+      if (!localStorage.getItem('token')) {
+         next({
+          name:"Login"
+        })
+      }
+      else {
+        next();
+      }
+    }
   },
   {
     path: '/wishlist',
